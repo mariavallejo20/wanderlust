@@ -1,0 +1,43 @@
+@theme {
+    /* Colors */
+    --color-primary: #007934;
+    --color-primary-light: #00a347;
+    --color-success: #52c41a;
+    --color-error: #ff4d4f;
+    --color-warning: #faad14;
+    --color-text: rgb(0 0 0 / 88%);
+    --color-text-secondary: rgb(0 0 0 / 65%);
+    --color-text-tertiary: rgb(0 0 0 / 45%);
+    --color-bg-container: #fff;
+    --color-bg-layout: #f5f5f5;
+    --color-border: #d9d9d9;
+    --color-border-secondary: #f0f0f0;
+
+    /* Font family */
+    --font-wanderlust: "Montserrat", system-ui, sans-serif;
+
+    /* Font sizes */
+    --font-size-sm: 14px;
+    --font-size-base: 16px;
+    --font-size-lg: 18px;
+    --font-size-xl: 20px;
+    --font-size-2xl: 24px;
+
+    /* Border radius */
+    --radius-default: 3px;
+    --radius-lg: 12px;
+    --radius-sm: 3px;
+
+    /* Control heights */
+    --control-height: 40px;
+    --control-height-lg: 48px;
+    --control-height-sm: 32px;
+
+    /* Shadows */
+    --shadow-sm:
+        0 1px 2px 0 rgb(0 0 0 / 3%), 0 1px 6px -1px rgb(0 0 0 / 2%),
+        0 2px 4px 0 rgb(0 0 0 / 2%);
+    --shadow-md:
+        0 6px 16px 0 rgb(0 0 0 / 8%), 0 3px 6px -4px rgb(0 0 0 / 12%),
+        0 9px 28px 8px rgb(0 0 0 / 5%);
+}

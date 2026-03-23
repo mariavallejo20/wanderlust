@@ -1,0 +1,65 @@
+schema: spec-driven
+
+context: |
+  Wanderlust — Travel itinerary organizer SPA + lightweight backend
+
+  ## Frontend
+  React 19 + TypeScript 5.9 + Vite 7 + MobX 6 + Inversify 7 DI
+  Tailwind CSS 4 (tw: prefix) + Ant Design 6 for UI components
+
+  ## Backend (future phase)
+  Fastify 5 + Drizzle ORM + SQLite (better-sqlite3)
+  Pattern: Frontend → Fastify REST API → SQLite
+  Backend is phase 6 — frontend works 100% with MSW mocks first
+
+  ## Frontend Architecture (Clean Architecture modules)
+  src/modules/{module}/ with domain/ | data/ | presentation/
+  Flow: Component (observer) → ViewModel (MobX) → UseCase → Repository → Datasource
+
+  ## Critical Conventions
+  - Errors: neverthrow Result<T, E> and ResultAsync, not try/catch
+  - Validation: Two-level Zod 4 (DTO schema → Model schema via mapper)
+  - Domain models: Class with private constructor, factory create() returning Result, branded types
+  - ViewModels: MobX @observable + @action + @computed, injectable via Inversify
+  - Imports: Use path aliases @di/*, @wanderlust/*, @core/*, @trip/*, @itinerary/*, etc.
+  - Tailwind: prefix tw: (e.g., className="tw:p-4 tw:flex tw:gap-2")
+  - i18n: i18next with namespaces per module, type-safe resources
+
+  ## File Naming
+  *.model.ts | *.viewmodel.ts | *.usecase.ts | *.repository.ts | *.impl-repository.ts
+  *.datasource.ts | *.dto.ts | *.mapper.ts | *.component.tsx | *.store.ts
+  Tests co-located: *.test.ts | *.integration.ts | *.browser.ts
+  Stories: *.stories.tsx | Mocks: *.mock.ts
+  DI: *-module.di.ts | *-types.di.ts
+
+  ## Module Structure
+  Modules: core, trip, itinerary, activity, budget, map-view, share, dashboard, analytics
+
+  ## Testing
+  Vitest projects: unit (jsdom) | integration (jsdom + MSW, 30s) | browser (Playwright)
+  Playwright e2e standalone for full flows
+  Custom matchers: toBeOk/toBeErr for neverthrow Result
+  MSW 2: server handlers for tests, browser handlers for dev
+
+  ## Reference Project
+  Architecture based on ECI AV project at /home/mvo/dev/ECI/eci-av
+  Replicate patterns faithfully — see WANDERLUST_PROJECT_PLAN.md section 13
+
+rules:
+  specs:
+    - Use Given/When/Then for acceptance criteria
+    - Reference the project plan (WANDERLUST_PROJECT_PLAN.md) for domain model schemas and feature requirements
+    - Include responsive requirements where applicable
+
+  design:
+    - "Specify exact dependency versions from the reference project (ECI AV)"
+    - "Specify DI registrations, Zod schemas (DTO + Model), and path aliases"
+    - "Include complete file paths following naming conventions"
+    - "Reference ECI AV patterns from section 13 of WANDERLUST_PROJECT_PLAN.md"
+
+  tasks:
+    - Use exact file naming conventions from the project plan
+    - Include co-located test file requirements
+    - "Specify import alias to use for each file"
+    - "Include exact content or code snippets for configuration files"
+    - "Reference GitHub issue number (#N) for traceability"
