@@ -1,0 +1,8 @@
+@import "tailwindcss" prefix(tw);
+@import "./design-tokens.css";
+
+@layer base {
+    body {
+        background-size: cover;
+    }
+}
