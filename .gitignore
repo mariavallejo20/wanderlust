@@ -39,6 +39,3 @@ storybook-static/
 
 # Database
 *.db
-
-# OpenSpec (ESLint ignore)
-openspec/
