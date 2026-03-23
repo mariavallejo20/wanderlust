@@ -1,2 +1,44 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Logs
+*.log
+
+# TypeScript
+*.tsbuildinfo
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env.keys
+**/.env.keys
+
+# Coverage
+coverage/
+
+# Storybook
+storybook-static/
+
+# IDEs
+.idea/
+.vscode/*
+
+# OS
+.DS_Store
+
+# pnpm
+.pnpm-store/
+
 # AI tooling (local only)
 .claude/
+.worktrees/
+
+# Database
+*.db
+
+# OpenSpec (ESLint ignore)
+openspec/
