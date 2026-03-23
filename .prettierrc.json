@@ -1,0 +1,13 @@
+{
+    "singleAttributePerLine": true,
+    "tabWidth": 4,
+    "overrides": [
+        {
+            "files": ".nvmrc",
+            "options": {
+                "parser": "yaml"
+            }
+        }
+    ],
+    "plugins": ["prettier-plugin-organize-imports"]
+}
