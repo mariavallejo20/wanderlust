@@ -7,7 +7,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 const baseConfig: UserConfig = {
     plugins: [
         react({ tsDecorators: true }),
-        tsconfigPaths(),
+        tsconfigPaths({ projects: ["./tsconfig.app.json"] }),
         svgr(),
         tailwindcss(),
     ],
