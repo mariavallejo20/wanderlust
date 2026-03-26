@@ -16,8 +16,8 @@ Wanderlust no tiene ningún código todavía — solo un README. Antes de poder 
 - Configurar Prettier con `prettier-plugin-organize-imports`, tab width 4, single attribute per line
 - Configurar Stylelint con soporte SCSS y reglas Tailwind-aware (`@tailwind`, `@apply`, `@reference`, `@theme`)
 - Configurar Husky 9 con:
-  - `pre-commit`: validate-branch-name + lint-staged (Prettier + ESLint + Knip)
-  - `commit-msg`: commitlint (conventional commits)
+    - `pre-commit`: validate-branch-name + lint-staged (Prettier + ESLint + Knip)
+    - `commit-msg`: commitlint (conventional commits)
 - Configurar Knip para detección de dead code/dependencies
 - Crear `.nvmrc` (Node 22.21.0), `.npmrc` (engine-strict), `.editorconfig`
 - Crear `.gitignore` completo (node_modules, dist, .env, .env.keys, coverage, storybook-static, etc.)
