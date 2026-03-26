@@ -1,46 +1,46 @@
 ## Context
 
-El repositorio Wanderlust solo contiene un `README.md` en la rama `develop`. No existe ningún archivo de configuración, dependencia ni estructura de código. Este diseño define exactamente qué archivos crear, con qué contenido y qué versiones.
+The Wanderlust repository only contains a `README.md` on the `develop` branch. No configuration files, dependencies, or code structure exist. This design defines exactly which files to create, with what content and versions.
 
-El proyecto usa Node 22.21.0, pnpm 10.27.0, y un monorepo con `apps/frontend/` + `apps/backend/` (fase posterior).
+The project uses Node 22.21.0, pnpm 10.27.0, and a monorepo with `apps/frontend/` + `apps/backend/` (later phase).
 
 ## Goals / Non-Goals
 
 **Goals:**
 
-- Monorepo funcional: `pnpm install` + `pnpm dev` arrancan el frontend sin errores
-- TypeScript compila sin errores con strict + decorators
-- ESLint, Prettier y Stylelint ejecutan sin warnings sobre el código scaffolded
-- Husky intercepta commits: valida branch name, ejecuta lint-staged, valida conventional commits
-- Tailwind CSS 4 con prefix `tw:` renderiza correctamente
-- Estructura de directorios lista para que las propuestas 02–04 puedan empezar directamente
-- `pnpm build` genera un bundle de producción válido
+- Working monorepo: `pnpm install` + `pnpm dev` starts the frontend without errors
+- TypeScript compiles without errors with strict + decorators
+- ESLint, Prettier, and Stylelint run without warnings on the scaffolded code
+- Husky intercepts commits: validates branch name, runs lint-staged, validates conventional commits
+- Tailwind CSS 4 with prefix `tw:` renders correctly
+- Directory structure ready for proposals 02–04 to start directly
+- `pnpm build` generates a valid production bundle
 
 **Non-Goals:**
 
-- Código funcional de ningún módulo (domain, data, presentation) — solo directorios vacíos con `.gitkeep`
-- Inversify container, Http factory, o cualquier infraestructura de core (propuesta 02)
-- i18n, routing, o layout (propuesta 03)
-- MSW, Storybook, o configuración de Vitest (propuesta 04)
-- Tests de cualquier tipo
-- Backend (`apps/backend/`) — propuesta 20
+- Functional code in any module (domain, data, presentation) — only empty directories with `.gitkeep`
+- Inversify container, Http factory, or any core infrastructure (proposal 02)
+- i18n, routing, or layout (proposal 03)
+- MSW, Storybook, or Vitest configuration (proposal 04)
+- Tests of any kind
+- Backend (`apps/backend/`) — proposal 20
 
 ## Decisions
 
-### D1 — Estructura del monorepo: pnpm workspaces sin Nx
+### D1 — Monorepo structure: pnpm workspaces without Nx
 
-**Decisión**: Usar pnpm workspaces nativo, sin Nx ni Turborepo.
+**Decision**: Use native pnpm workspaces, without Nx or Turborepo.
 
-**Alternativas consideradas**:
+**Alternatives considered**:
 
-- Nx: Overkill para un proyecto con 2 workspaces. Añade complejidad de configuración (nx.json, project.json) y dependencia pesada.
-- Turborepo: Similar a Nx en overhead. No aporta valor con solo un frontend.
+- Nx: Overkill for a project with 2 workspaces. Adds configuration complexity (nx.json, project.json) and heavy dependency.
+- Turborepo: Similar to Nx in overhead. Adds no value with just one frontend.
 
-**Razón**: pnpm workspaces con version catalogs cubre todas las necesidades (dependency hoisting, shared versions, script orchestration con `--filter`).
+**Rationale**: pnpm workspaces with version catalogs covers all needs (dependency hoisting, shared versions, script orchestration with `--filter`).
 
-### D2 — Version catalogs en pnpm-workspace.yaml
+### D2 — Version catalogs in pnpm-workspace.yaml
 
-**Decisión**: Centralizar versiones compartidas entre workspaces usando `catalogs.default` en `pnpm-workspace.yaml`.
+**Decision**: Centralise shared versions across workspaces using `catalogs.default` in `pnpm-workspace.yaml`.
 
 ```yaml
 catalogs:
@@ -51,21 +51,21 @@ catalogs:
         zod: 4.1.12
 ```
 
-**Razón**: Evita desincronización de versiones entre `apps/frontend` y futuro `apps/backend`. Los packages usan `"catalog:"` en su `package.json`.
+**Rationale**: Prevents version drift between `apps/frontend` and future `apps/backend`. Packages use `"catalog:"` in their `package.json`.
 
-### D3 — Vite config split en 3 archivos
+### D3 — Vite config split into 3 files
 
-**Decisión**: Dividir la configuración de Vite en `vite.config.base.ts` (plugins compartidos), `vite.config.local.ts` (dev server, checker, proxy) y `vite.config.prod.ts` (optimizaciones de build). El `vite.config.ts` los compone con `mergeConfig`.
+**Decision**: Split Vite configuration into `vite.config.base.ts` (shared plugins), `vite.config.local.ts` (dev server, checker, proxy), and `vite.config.prod.ts` (build optimisations). `vite.config.ts` composes them with `mergeConfig`.
 
-**Alternativas consideradas**:
+**Alternatives considered**:
 
-- Un solo `vite.config.ts` con condicionales: Funciona pero se vuelve difícil de mantener con el checker plugin, proxy config, y futuros plugins.
+- Single `vite.config.ts` with conditionals: Works but becomes hard to maintain with the checker plugin, proxy config, and future plugins.
 
-**Razón**: Separación clara de concerns. El checker plugin (TypeScript + ESLint + Stylelint overlay) solo se activa en dev, no en build.
+**Rationale**: Clear separation of concerns. The checker plugin (TypeScript + ESLint + Stylelint overlay) only activates in dev, not in build.
 
-### D4 — Tailwind CSS 4 con prefix `tw:`
+### D4 — Tailwind CSS 4 with prefix `tw:`
 
-**Decisión**: Usar Tailwind CSS 4 con `@import "tailwindcss" prefix(tw)` para evitar colisiones con clases de Ant Design.
+**Decision**: Use Tailwind CSS 4 with `@import "tailwindcss" prefix(tw)` to avoid collisions with Ant Design classes.
 
 ```css
 @import "tailwindcss";
@@ -74,35 +74,35 @@ catalogs:
 @import "./design-tokens.css";
 ```
 
-**Alternativas consideradas**:
+**Alternatives considered**:
 
-- Sin prefix: Riesgo de colisión entre utilidades de Tailwind y clases de Ant Design (ambos usan `p-*`, `m-*`, `text-*`).
+- No prefix: Risk of collision between Tailwind utilities and Ant Design classes (both use `p-*`, `m-*`, `text-*`).
 
-**Razón**: El prefix `tw:` evita colisiones y deja claro en el JSX qué clases son Tailwind vs. otras.
+**Rationale**: The `tw:` prefix avoids collisions and makes it clear in JSX which classes are Tailwind vs. others.
 
-### D5 — Design tokens como CSS custom properties
+### D5 — Design tokens as CSS custom properties
 
-**Decisión**: Definir tokens de diseño en `design-tokens.css` usando `@theme` de Tailwind 4, y exportarlos también como constantes TS en `design-tokens.ts` para uso programático (Ant Design ConfigProvider).
+**Decision**: Define design tokens in `design-tokens.css` using Tailwind 4's `@theme`, and also export them as TS constants in `design-tokens.ts` for programmatic use (Ant Design ConfigProvider).
 
-**Razón**: Single source of truth para colores, tipografía, spacing. Ant Design consume los tokens via TS, Tailwind los consume via CSS.
+**Rationale**: Single source of truth for colours, typography, spacing. Ant Design consumes tokens via TS, Tailwind consumes them via CSS.
 
-### D6 — ESLint 9 flat config con typescript-eslint type-aware
+### D6 — ESLint 9 flat config with typescript-eslint type-aware
 
-**Decisión**: ESLint 9 con flat config (`eslint.config.ts`). Config base en raíz (heredada por todos los workspaces) + config específica en `apps/frontend/eslint.config.ts` que añade React Hooks y reglas type-aware.
+**Decision**: ESLint 9 with flat config (`eslint.config.ts`). Base config at root (inherited by all workspaces) + specific config in `apps/frontend/eslint.config.ts` adding React Hooks and type-aware rules.
 
 **Plugins**:
 
-- `@eslint/js` — reglas base recomendadas
-- `typescript-eslint` — type-aware linting con `projectService: true`
-- `eslint-config-prettier` — desactiva reglas que conflictúan con Prettier
-- `eslint-plugin-zod` — reglas para schemas Zod
-- `eslint-plugin-react-hooks` — reglas de hooks
+- `@eslint/js` — recommended base rules
+- `typescript-eslint` — type-aware linting with `projectService: true`
+- `eslint-config-prettier` — disables rules that conflict with Prettier
+- `eslint-plugin-zod` — rules for Zod schemas
+- `eslint-plugin-react-hooks` — hooks rules
 
-**Razón**: El `--flag v10_config_lookup_from_file` se necesita para que ESLint 9 busque config desde el archivo, no desde el CWD.
+**Rationale**: The `--flag v10_config_lookup_from_file` is needed for ESLint 9 to look up config from the file, not from the CWD.
 
 ### D7 — Husky + lint-staged + validate-branch-name
 
-**Decisión**: Pre-commit hook ejecuta `validate-branch-name` (fuerza patrón `feature|bugfix|fix|hotfix|release/*`) + `lint-staged` (Prettier + ESLint + Knip sobre archivos staged). Commit-msg hook ejecuta `commitlint` (conventional commits).
+**Decision**: Pre-commit hook runs `validate-branch-name` (enforces `feature|bugfix|fix|hotfix|release/*` pattern) + `lint-staged` (Prettier + ESLint + Knip on staged files). Commit-msg hook runs `commitlint` (conventional commits).
 
 ```bash
 # .husky/pre-commit
@@ -111,11 +111,11 @@ validate-branch-name
 lint-staged --config lint-staged.config.ts
 ```
 
-**Razón**: Catch issues antes de que lleguen al repo. `--experimental-strip-types` permite ejecutar config files `.ts` sin compilación.
+**Rationale**: Catch issues before they reach the repo. `--experimental-strip-types` allows executing `.ts` config files without compilation.
 
-### D8 — Path aliases con tsconfig paths
+### D8 — Path aliases with tsconfig paths
 
-**Decisión**: Definir path aliases en `tsconfig.app.json` y resolver en Vite via `vite-tsconfig-paths`.
+**Decision**: Define path aliases in `tsconfig.app.json` and resolve in Vite via `vite-tsconfig-paths`.
 
 ```json
 {
@@ -136,11 +136,9 @@ lint-staged --config lint-staged.config.ts
 }
 ```
 
-**Razón**: Imports limpios (`@trip/domain/models/trip.model` vs `../../../modules/trip/domain/models/trip.model`). Los alias se resuelven tanto en TypeScript como en Vite (runtime).
+**Rationale**: Clean imports (`@trip/domain/models/trip.model` vs `../../../modules/trip/domain/models/trip.model`). Aliases resolve in both TypeScript and Vite (runtime).
 
-## Versiones exactas de dependencias
-
-Versiones exactas de cada dependencia:
+## Exact Dependency Versions
 
 ### Root `package.json` devDependencies
 
@@ -214,22 +212,22 @@ Versiones exactas de cada dependencia:
 | `vite-plugin-svgr`               | 4.5.0    |
 | `vite-tsconfig-paths`            | 6.0.5    |
 
-## Archivos a crear (listado completo)
+## Files to Create (complete list)
 
-### Raíz del monorepo
+### Monorepo root
 
-| Archivo                          | Contenido clave                                               |
+| File                             | Key content                                                   |
 | -------------------------------- | ------------------------------------------------------------- |
 | `pnpm-workspace.yaml`            | packages: `apps/*`, catalogs, allowBuilds, blockExoticSubdeps |
-| `package.json`                   | name `@wanderlust/workspace`, scripts raíz, devDependencies   |
+| `package.json`                   | name `@wanderlust/workspace`, root scripts, devDependencies   |
 | `tsconfig.base.json`             | ES2023, ESNext, bundler, strict, skipLibCheck                 |
-| `tsconfig.json`                  | References a `apps/frontend`                                  |
-| `eslint.config.ts`               | Base config exportada + default config                        |
+| `tsconfig.json`                  | References to `apps/frontend`                                 |
+| `eslint.config.ts`               | Exported base config + default config                         |
 | `.prettierrc.json`               | tabWidth 4, singleAttributePerLine, organize-imports plugin   |
 | `commitlint.config.ts`           | Extends `@commitlint/config-conventional`                     |
 | `lint-staged.config.ts`          | Prettier + ESLint + Knip                                      |
-| `validate-branch-name.config.ts` | Pattern para ramas                                            |
-| `knip.config.ts`                 | Workspace frontend con entry/project                          |
+| `validate-branch-name.config.ts` | Branch pattern                                                |
+| `knip.config.ts`                 | Frontend workspace with entry/project                         |
 | `.husky/pre-commit`              | validate-branch-name + lint-staged                            |
 | `.husky/commit-msg`              | commitlint --edit                                             |
 | `.nvmrc`                         | `22.21.0`                                                     |
@@ -239,30 +237,30 @@ Versiones exactas de cada dependencia:
 
 ### `apps/frontend/`
 
-| Archivo                | Contenido clave                                             |
+| File                   | Key content                                                 |
 | ---------------------- | ----------------------------------------------------------- |
 | `package.json`         | name `@wanderlust/frontend`, dependencies + devDependencies |
 | `tsconfig.app.json`    | Extends base, jsx react-jsx, decorators, path aliases       |
 | `vite.config.ts`       | Compose base + local/prod                                   |
 | `vite.config.base.ts`  | Plugins: react-swc, tsconfigPaths, svgr, tailwindcss        |
 | `vite.config.local.ts` | Checker (TS+ESLint+Stylelint), dev server, proxy            |
-| `vite.config.prod.ts`  | (vacío, extensible)                                         |
-| `eslint.config.ts`     | Importa baseConfig, añade React Hooks, type-aware           |
+| `vite.config.prod.ts`  | (empty, extensible)                                         |
+| `eslint.config.ts`     | Imports baseConfig, adds React Hooks, type-aware            |
 | `stylelint.config.cjs` | SCSS + Tailwind rules                                       |
 | `index.html`           | div#root, script module src/main.tsx                        |
 | `.env.example`         | VITE_API_BASE_URL, VITE_USE_MSW, VITE_APP_STAGE             |
 
 ### `apps/frontend/src/`
 
-| Archivo                    | Contenido                                           |
+| File                       | Content                                             |
 | -------------------------- | --------------------------------------------------- |
 | `main.tsx`                 | createRoot + StrictMode + placeholder App           |
-| `App.tsx`                  | Componente mínimo con texto placeholder             |
+| `App.tsx`                  | Minimal component with placeholder text             |
 | `vite-env.d.ts`            | Triple-slash reference vite/client                  |
-| `styles/tailwind.css`      | Imports Tailwind con prefix tw, design-tokens       |
-| `styles/design-tokens.css` | @theme con colores, fonts, spacing, radios, shadows |
+| `styles/tailwind.css`      | Tailwind imports with prefix tw, design-tokens      |
+| `styles/design-tokens.css` | @theme with colours, fonts, spacing, radii, shadows |
 
-### Directorios vacíos (con `.gitkeep`)
+### Empty directories (with `.gitkeep`)
 
 ```
 src/di/
@@ -300,14 +298,14 @@ tests/utils/
 
 ## Risks / Trade-offs
 
-**[R1] Versiones pueden estar desactualizadas al momento de implementar** → Si hay minor bumps disponibles al implementar, se pueden actualizar sin riesgo. Mantener las mismas major versions.
+**[R1] Versions may be outdated at implementation time** → If minor bumps are available when implementing, they can be updated without risk. Keep the same major versions.
 
-**[R2] ESLint 9 flat config aún requiere `--flag v10_config_lookup_from_file`** → Este flag será innecesario en ESLint 10. Por ahora se incluye en todos los scripts.
+**[R2] ESLint 9 flat config still requires `--flag v10_config_lookup_from_file`** → This flag will be unnecessary in ESLint 10. For now it's included in all scripts.
 
-**[R3] `vite-plugin-checker` puede ralentizar el dev server** → Solo se activa en `vite.config.local.ts` (dev), no en build. El overlay se configura con `initialIsOpen: "error"` para no molestar con warnings.
+**[R3] `vite-plugin-checker` can slow down the dev server** → Only activates in `vite.config.local.ts` (dev), not in build. The overlay is configured with `initialIsOpen: "error"` to avoid disrupting with warnings.
 
-**[R4] Tailwind prefix `tw:` añade verbosidad al JSX** → Trade-off aceptado: la claridad de qué clases son Tailwind vs Ant Design vale más que la brevedad.
+**[R4] Tailwind prefix `tw:` adds verbosity to JSX** → Accepted trade-off: the clarity of which classes are Tailwind vs Ant Design is worth more than brevity.
 
 ## Open Questions
 
-- Ninguna. Esta propuesta es puramente de configuración.
+- None. This proposal is purely configuration.
