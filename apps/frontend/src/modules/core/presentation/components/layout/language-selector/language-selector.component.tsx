@@ -1,6 +1,7 @@
-import { Select } from "antd";
 import type { FC } from "react";
 import { useTranslation } from "react-i18next";
+
+import { WlSelect } from "@core/presentation/components/data-entry/select/wl-select.component";
 
 const languageOptions = [
     { value: "es", label: "ES" },
@@ -11,7 +12,7 @@ export const LanguageSelector: FC = () => {
     const { i18n } = useTranslation();
 
     return (
-        <Select
+        <WlSelect
             value={i18n.language}
             options={languageOptions}
             onChange={(lng) => i18n.changeLanguage(lng)}

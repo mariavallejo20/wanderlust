@@ -1,5 +1,4 @@
-import { Typography } from "antd";
-
+import { WlTypographyTitle } from "@core/presentation/components/general/typography/wl-typography.component";
 import { useAppTranslation } from "@core/presentation/hook/use-app-translation/use-app-translation.hook";
 
 export const DashboardPage = () => {
@@ -7,9 +6,9 @@ export const DashboardPage = () => {
 
     return (
         <div className="tw:p-6">
-            <Typography.Title level={2}>
+            <WlTypographyTitle level={2}>
                 {t("pages.dashboard")}
-            </Typography.Title>
+            </WlTypographyTitle>
         </div>
     );
 };

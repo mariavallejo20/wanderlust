@@ -1,16 +1,20 @@
-import { Layout } from "antd";
 import type { FC } from "react";
 import { Outlet } from "react-router";
+
+import {
+    WlLayout,
+    WlLayoutContent,
+} from "@core/presentation/components/layout/wl-layout/wl-layout.component";
 
 import { AppHeader } from "../app-header/app-header.component";
 
 export const AppLayout: FC = () => {
     return (
-        <Layout className="tw:min-h-screen">
+        <WlLayout className="tw:min-h-screen">
             <AppHeader />
-            <Layout.Content className="tw:flex-1">
+            <WlLayoutContent className="tw:flex-1">
                 <Outlet />
-            </Layout.Content>
-        </Layout>
+            </WlLayoutContent>
+        </WlLayout>
     );
 };
