@@ -18,6 +18,10 @@ export const designTokens = {
     color: {
         primary: parseVar("--color-primary"),
         primaryLight: parseVar("--color-primary-light"),
+        primaryHover: parseVar("--color-primary-hover"),
+        secondary: parseVar("--color-secondary"),
+        accentWarm: parseVar("--color-accent-warm"),
+        accentBlue: parseVar("--color-accent-blue"),
         success: parseVar("--color-success"),
         error: parseVar("--color-error"),
         warning: parseVar("--color-warning"),
