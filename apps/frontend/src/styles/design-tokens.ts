@@ -1,13 +1,13 @@
 import cssRaw from "./design-tokens.css?raw";
 
 function parseVar(name: string): string {
-    const re = new RegExp(`${name}:\\s*(.+?)\\s*;`);
+    const re = new RegExp(`${name}:\\s*([\\s\\S]+?)\\s*;`);
     const match = cssRaw.match(re);
     if (!match)
         throw new Error(
             `Design token "${name}" not found in design-tokens.css`,
         );
-    return match[1].trim();
+    return match[1].replace(/\s+/g, " ").trim();
 }
 
 function parseNum(name: string): number {
