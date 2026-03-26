@@ -1,0 +1,35 @@
+{
+    "appTitle": "Wanderlust",
+    "nav": {
+        "dashboard": "Panel",
+        "trips": "Viajes"
+    },
+    "actions": {
+        "save": "Guardar",
+        "cancel": "Cancelar",
+        "delete": "Eliminar",
+        "confirm": "Confirmar",
+        "back": "Volver"
+    },
+    "emptyState": {
+        "title": "No hay nada aquí",
+        "description": "Empieza creando tu primer viaje"
+    },
+    "error": {
+        "generic": "Ha ocurrido un error inesperado",
+        "notFound": "Página no encontrada"
+    },
+    "pages": {
+        "dashboard": "Panel de viajes",
+        "tripDetail": "Detalle del viaje",
+        "itinerary": "Itinerario",
+        "budget": "Presupuesto",
+        "mapView": "Mapa",
+        "shared": "Itinerario compartido",
+        "notFound": "Página no encontrada"
+    },
+    "notFound": {
+        "message": "La página que buscas no existe o ha sido movida.",
+        "backHome": "Volver al panel"
+    }
+}

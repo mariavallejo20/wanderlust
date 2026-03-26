@@ -8,7 +8,7 @@
 - [x] 1.3 Create `.editorconfig` (UTF-8, LF, indent 2 spaces, trim trailing whitespace, Makefile tab indent)
 - [x] 1.4 Create `pnpm-workspace.yaml` with `packages: [apps/*]`, version catalogs (`@types/node: 25.0.3`, `dotenv: 17.2.3`, `typescript: 5.9.3`, `zod: 4.1.12`), `allowBuilds` for `@parcel/watcher`, `@swc/core`, `esbuild`, `msw`, `blockExoticSubdeps: true`, `minimumReleaseAge: 1440`
 - [x] 1.5 Create root `package.json` with `name: @wanderlust/workspace`, `version: 0.1.0`, `private: true`, `type: module`, `packageManager: pnpm@10.27.0`, `engines` (node 22.21.0, pnpm 10.27.0), scripts (`dev`, `build`, `web:dev`, `web:build`, `lint:eslint`, `lint:eslint:fix`, `lint:prettier`, `lint:prettier:fix`, `lint:knip`, `prepare: husky`), and devDependencies as specified in design.md
-- [x] 1.6 Create `.gitignore` covering: node_modules, dist, _.log, _.tsbuildinfo, .env, .env.local, .env._.local, .env.keys, \*\*/.env.keys, coverage, storybook-static, .idea, .vscode/_, .DS_Store, .pnpm-store, .claude/worktrees, .worktrees/, \*.db, openspec (ESLint ignore)
+- [x] 1.6 Create `.gitignore` covering: node*modules, dist, *.log, _.tsbuildinfo, .env, .env.local, .env._.local, .env.keys, \*\*/.env.keys, coverage, storybook-static, .idea, .vscode/\_, .DS_Store, .pnpm-store, .claude/worktrees, .worktrees/, \*.db, openspec (ESLint ignore)
 
 ## 2. TypeScript configuration
 

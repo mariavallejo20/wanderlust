@@ -1,0 +1,10 @@
+{
+    "required": "Este campo es obligatorio",
+    "minLength": "Debe tener al menos {{min}} caracteres",
+    "maxLength": "No puede superar los {{max}} caracteres",
+    "invalidDate": "La fecha no es válida",
+    "invalidEmail": "El correo electrónico no es válido",
+    "invalidUrl": "La URL no es válida",
+    "positiveNumber": "Debe ser un número positivo",
+    "endAfterStart": "La fecha de fin debe ser posterior a la de inicio"
+}

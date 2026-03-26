@@ -1,0 +1,35 @@
+{
+    "appTitle": "Wanderlust",
+    "nav": {
+        "dashboard": "Dashboard",
+        "trips": "Trips"
+    },
+    "actions": {
+        "save": "Save",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "confirm": "Confirm",
+        "back": "Back"
+    },
+    "emptyState": {
+        "title": "Nothing here yet",
+        "description": "Start by creating your first trip"
+    },
+    "error": {
+        "generic": "An unexpected error occurred",
+        "notFound": "Page not found"
+    },
+    "pages": {
+        "dashboard": "Trip Dashboard",
+        "tripDetail": "Trip Detail",
+        "itinerary": "Itinerary",
+        "budget": "Budget",
+        "mapView": "Map",
+        "shared": "Shared Itinerary",
+        "notFound": "Page Not Found"
+    },
+    "notFound": {
+        "message": "The page you're looking for doesn't exist or has been moved.",
+        "backHome": "Back to dashboard"
+    }
+}
