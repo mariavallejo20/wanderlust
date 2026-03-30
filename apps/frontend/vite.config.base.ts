@@ -11,6 +11,16 @@ const baseConfig: UserConfig = {
         svgr(),
         tailwindcss(),
     ],
+    optimizeDeps: {
+        esbuildOptions: {
+            tsconfigRaw: {
+                compilerOptions: {
+                    experimentalDecorators: true,
+                    emitDecoratorMetadata: true,
+                },
+            },
+        },
+    },
     build: {
         target: "ES2023",
     },

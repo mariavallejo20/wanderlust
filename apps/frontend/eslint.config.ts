@@ -1,3 +1,4 @@
+import pluginVitest from "@vitest/eslint-plugin";
 import reactHooks from "eslint-plugin-react-hooks";
 import { baseConfig } from "../../eslint.config.ts";
 
@@ -25,5 +26,15 @@ export default [
         rules: {
             "no-console": "warn",
         },
+    },
+    {
+        files: ["src/**/*.{test,integration,browser}.{ts,tsx}"],
+        plugins: { vitest: pluginVitest },
+        rules: {
+            ...pluginVitest.configs.recommended.rules,
+            "vitest/no-skipped-tests": "warn",
+            "vitest/expect-expect": "error",
+        },
+        settings: { vitest: { typecheck: true } },
     },
 ];

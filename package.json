@@ -18,6 +18,10 @@
         "lint:prettier": "prettier --check .",
         "lint:prettier:fix": "prettier --write .",
         "lint:knip": "knip --max-issues 30",
+        "test": "pnpm --filter @wanderlust/frontend test",
+        "test:unit": "pnpm --filter @wanderlust/frontend test:unit",
+        "test:integration": "pnpm --filter @wanderlust/frontend test:integration",
+        "storybook": "pnpm --filter @wanderlust/frontend storybook",
         "prepare": "husky"
     },
     "devDependencies": {

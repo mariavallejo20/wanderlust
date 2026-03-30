@@ -6,12 +6,12 @@
         "lib": ["ESNext", "DOM", "DOM.Iterable"],
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
-        "types": ["vite/client", "node"],
+        "types": ["vite/client", "node", "vitest/globals"],
         "baseUrl": ".",
         "paths": {
             "@di/*": ["src/di/*"],
             "@wanderlust/*": ["src/*"],
-            "@tests/*": ["tests/*"],
+            "@tests/*": ["src/tests/*"],
             "@core/*": ["src/modules/core/*"],
             "@trip/*": ["src/modules/trip/*"],
             "@itinerary/*": ["src/modules/itinerary/*"],
@@ -23,5 +23,5 @@
             "@analytics/*": ["src/modules/analytics/*"]
         }
     },
-    "include": ["src", "tests"]
+    "include": ["src"]
 }

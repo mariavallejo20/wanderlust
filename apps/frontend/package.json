@@ -15,7 +15,14 @@
         "dev:typecheck": "tsc --noEmit --watch",
         "preview": "vite preview",
         "lint:stylelint": "stylelint \"src/**/*.{css,scss}\"",
-        "lint:stylelint:fix": "stylelint \"src/**/*.{css,scss}\" --fix"
+        "lint:stylelint:fix": "stylelint \"src/**/*.{css,scss}\" --fix",
+        "test": "vitest",
+        "test:unit": "vitest --project unit",
+        "test:integration": "vitest --project integration",
+        "test:browser": "vitest --project browser",
+        "test:coverage": "vitest --coverage",
+        "storybook": "storybook dev -p 6006",
+        "build-storybook": "storybook build"
     },
     "dependencies": {
         "@ant-design/icons": "6.1.0",
@@ -42,16 +49,29 @@
         "zod": "catalog:"
     },
     "devDependencies": {
+        "@storybook/addon-a11y": "10.3.3",
+        "@storybook/react-vite": "10.3.3",
         "@tailwindcss/vite": "4.1.18",
+        "@testing-library/jest-dom": "6.9.1",
+        "@testing-library/react": "16.3.2",
+        "@testing-library/user-event": "14.6.1",
         "@total-typescript/ts-reset": "0.6.1",
         "@types/luxon": "3.7.1",
         "@types/node": "catalog:",
         "@types/react": "19.2.14",
         "@types/react-dom": "19.2.3",
         "@vitejs/plugin-react-swc": "4.2.3",
+        "@vitest/browser": "4.1.2",
+        "@vitest/coverage-v8": "4.1.2",
+        "@vitest/eslint-plugin": "1.6.13",
         "eslint-plugin-react-hooks": "6.1.0",
+        "eslint-plugin-storybook": "10.3.3",
         "globals": "16.5.0",
+        "jsdom": "29.0.1",
+        "msw": "2.12.14",
+        "playwright": "1.58.2",
         "sass": "1.96.0",
+        "storybook": "10.3.3",
         "stylelint": "16.26.1",
         "stylelint-config-prettier-scss": "1.0.0",
         "stylelint-config-standard": "39.0.1",
@@ -62,6 +82,12 @@
         "vite": "7.3.1",
         "vite-plugin-checker": "0.12.0",
         "vite-plugin-svgr": "4.5.0",
-        "vite-tsconfig-paths": "6.0.5"
+        "vite-tsconfig-paths": "6.0.5",
+        "vitest": "4.1.2"
+    },
+    "msw": {
+        "workerDirectory": [
+            "public"
+        ]
     }
 }
