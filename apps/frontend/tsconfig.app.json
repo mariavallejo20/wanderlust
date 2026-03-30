@@ -1,0 +1,27 @@
+{
+    "extends": "../../tsconfig.base.json",
+    "compilerOptions": {
+        "composite": true,
+        "jsx": "react-jsx",
+        "lib": ["ESNext", "DOM", "DOM.Iterable"],
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "types": ["vite/client", "node", "vitest/globals"],
+        "baseUrl": ".",
+        "paths": {
+            "@di/*": ["src/di/*"],
+            "@wanderlust/*": ["src/*"],
+            "@tests/*": ["src/tests/*"],
+            "@core/*": ["src/modules/core/*"],
+            "@trip/*": ["src/modules/trip/*"],
+            "@itinerary/*": ["src/modules/itinerary/*"],
+            "@activity/*": ["src/modules/activity/*"],
+            "@budget/*": ["src/modules/budget/*"],
+            "@map-view/*": ["src/modules/map-view/*"],
+            "@share/*": ["src/modules/share/*"],
+            "@dashboard/*": ["src/modules/dashboard/*"],
+            "@analytics/*": ["src/modules/analytics/*"]
+        }
+    },
+    "include": ["src"]
+}

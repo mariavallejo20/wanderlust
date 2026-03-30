@@ -1,0 +1,18 @@
+packages:
+    - "apps/*"
+
+catalogs:
+    default:
+        "@types/node": 25.0.3
+        dotenv: 17.2.3
+        typescript: 5.9.3
+        zod: 4.1.12
+
+onlyBuiltDependencies:
+    - "@parcel/watcher"
+    - "@swc/core"
+    - esbuild
+    - msw
+
+blockExoticSubdeps: true
+minimumReleaseAge: 1440
