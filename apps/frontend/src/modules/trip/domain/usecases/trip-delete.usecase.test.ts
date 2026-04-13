@@ -18,7 +18,7 @@ function makeMockRepo(overrides?: Partial<TripRepository>): TripRepository {
 }
 
 describe("TripDeleteUseCase", () => {
-    it("returns Ok<void> when trip is deleted successfully", async () => {
+    it("should return Ok when trip is deleted successfully", async () => {
         const repo = makeMockRepo({ delete: vi.fn(() => okAsync(undefined)) });
         const useCase = new TripDeleteUseCase(repo);
 
@@ -26,10 +26,10 @@ describe("TripDeleteUseCase", () => {
             "12345678-1234-4123-a123-123456789012",
         );
 
-        expect(result).toBeOk();
+        expect(result.isOk()).toBe(true);
     });
 
-    it("returns Err when trip is not found", async () => {
+    it("should return Err when trip is not found", async () => {
         const repo = makeMockRepo({
             delete: vi.fn(() => errAsync(new FallbackError("not found"))),
         });
@@ -37,6 +37,8 @@ describe("TripDeleteUseCase", () => {
 
         const result = await useCase.execute("non-existing-id");
 
-        expect(result).toBeErr();
+        expect(result.isErr()).toBe(true);
+        const error = result._unsafeUnwrapErr();
+        expect.assert(error instanceof FallbackError);
     });
 });
