@@ -32,7 +32,7 @@ export default [
         plugins: { vitest: pluginVitest },
         rules: {
             ...pluginVitest.configs.recommended.rules,
-            "vitest/no-skipped-tests": "warn",
+            "vitest/no-disabled-tests": "warn",
             "vitest/expect-expect": "error",
         },
         settings: { vitest: { typecheck: true } },
