@@ -1,3 +1,5 @@
 import type { RequestHandler } from "msw";
 
-export const handlers: RequestHandler[] = [];
+import { tripHandlers } from "./trip.handlers";
+
+export const handlers: RequestHandler[] = [...tripHandlers];
