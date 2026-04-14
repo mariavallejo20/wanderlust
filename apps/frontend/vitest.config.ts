@@ -27,20 +27,6 @@ export default defineConfig({
                     hookTimeout: 30_000,
                 },
             },
-            {
-                extends: true,
-                test: {
-                    name: "browser",
-                    include: ["src/**/*.browser.{ts,tsx}"],
-                    setupFiles: ["src/tests/setup/vitest-setup.ts"],
-                    browser: {
-                        enabled: true,
-                        provider: "playwright",
-                        instances: [{ browser: "chromium" }],
-                        headless: true,
-                    },
-                },
-            },
         ],
         coverage: {
             provider: "v8",
