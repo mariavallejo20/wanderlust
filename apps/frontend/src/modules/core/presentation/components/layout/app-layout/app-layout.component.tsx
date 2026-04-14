@@ -12,7 +12,7 @@ export const AppLayout: FC = () => {
     return (
         <WlLayout className="tw:min-h-screen">
             <AppHeader />
-            <WlLayoutContent className="tw:flex-1">
+            <WlLayoutContent className="tw:flex-1 tw:overflow-auto">
                 <Outlet />
             </WlLayoutContent>
         </WlLayout>
