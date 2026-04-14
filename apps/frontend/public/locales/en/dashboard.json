@@ -1,0 +1,26 @@
+{
+    "pageTitle": "My Trips",
+    "search": {
+        "placeholder": "Search trips..."
+    },
+    "tabs": {
+        "all": "All",
+        "draft": "Draft",
+        "upcoming": "Upcoming",
+        "inProgress": "In Progress",
+        "completed": "Completed"
+    },
+    "status": {
+        "DRAFT": "Draft",
+        "UPCOMING": "Upcoming",
+        "IN_PROGRESS": "In Progress",
+        "COMPLETED": "Completed"
+    },
+    "tripCard": {
+        "duration": "{{count}} day",
+        "duration_other": "{{count}} days"
+    },
+    "error": {
+        "loadFailed": "Could not load your trips. Please try again."
+    }
+}

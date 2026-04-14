@@ -1,0 +1,26 @@
+{
+    "pageTitle": "Mis viajes",
+    "search": {
+        "placeholder": "Buscar viajes..."
+    },
+    "tabs": {
+        "all": "Todos",
+        "draft": "Borrador",
+        "upcoming": "Próximos",
+        "inProgress": "En curso",
+        "completed": "Completados"
+    },
+    "status": {
+        "DRAFT": "Borrador",
+        "UPCOMING": "Próximo",
+        "IN_PROGRESS": "En curso",
+        "COMPLETED": "Completado"
+    },
+    "tripCard": {
+        "duration": "{{count}} día",
+        "duration_other": "{{count}} días"
+    },
+    "error": {
+        "loadFailed": "No se pudieron cargar tus viajes. Inténtalo de nuevo."
+    }
+}
